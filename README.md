@@ -3,6 +3,9 @@
 Transform PDF documents into beautiful, interactive HTML pages with AI-powered summarization and content cleaning.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![GitHub stars](https://img.shields.io/github/stars/anirudhiitg/pdf_reader_skill?style=social)](https://github.com/anirudhiitg/pdf_reader_skill/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/anirudhiitg/pdf_reader_skill?style=social)](https://github.com/anirudhiitg/pdf_reader_skill/network/members)
 
 ## Features
 
@@ -65,10 +68,10 @@ Clone or download this repository:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/pdf-interactive-skill.git
+git clone https://github.com/anirudhiitg/pdf_reader_skill.git
 
 # Navigate to the skill directory
-cd pdf-interactive-skill
+cd pdf_reader_skill
 ```
 
 ### Step 3: Link to Claude Code
@@ -250,7 +253,7 @@ graph LR
 ## Project Structure
 
 ```
-pdf-interactive-skill/
+pdf_reader_skill/
 ├── SKILL.md                 # Skill definition for Claude Code
 ├── README.md                # This file
 ├── requirements.txt         # Python dependencies
@@ -376,10 +379,10 @@ Contributions are welcome! Here's how:
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/pdf-interactive-skill.git
+git clone https://github.com/anirudhiitg/pdf_reader_skill.git
 
 # Install in development mode
-cd pdf-interactive-skill
+cd pdf_reader_skill
 pip install -e .
 
 # Run tests
@@ -428,14 +431,14 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- 🐛 [Report a bug](https://github.com/yourusername/pdf-interactive-skill/issues)
-- 💡 [Request a feature](https://github.com/yourusername/pdf-interactive-skill/issues)
-- 📖 [Read the docs](https://github.com/yourusername/pdf-interactive-skill/wiki)
-- 💬 [Join discussions](https://github.com/yourusername/pdf-interactive-skill/discussions)
+- 🐛 [Report a bug](https://github.com/anirudhiitg/pdf_reader_skill/issues)
+- 💡 [Request a feature](https://github.com/anirudhiitg/pdf_reader_skill/issues)
+- 📖 [Read the docs](https://github.com/anirudhiitg/pdf_reader_skill/wiki)
+- 💬 [Join discussions](https://github.com/anirudhiitg/pdf_reader_skill/discussions)
 
 ## Author
 
-Created by [Your Name](https://github.com/yourusername)
+Created by [Anirudh Yadav](https://github.com/anirudhiitg)
 
 ---
 

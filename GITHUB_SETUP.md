@@ -6,14 +6,14 @@ This guide walks you through publishing your PDF Interactive Skill to GitHub.
 
 - GitHub account ([sign up here](https://github.com/join))
 - Git installed (already done ✓)
-- Repository is ready in: `/c/Users/anirudhyadav/pdf-interactive-skill`
+- Repository is ready in: `/c/Users/anirudhyadav/pdf_reader_skill`
 
 ## Step 1: Create GitHub Repository
 
 1. Go to [GitHub](https://github.com) and log in
 2. Click the "+" icon in the top right, select "New repository"
 3. Fill in the details:
-   - **Repository name**: `pdf-interactive-skill`
+   - **Repository name**: `pdf_reader_skill`
    - **Description**: "Convert PDFs to interactive HTML with AI summarization - A Claude Code skill"
    - **Visibility**: Public (recommended for sharing)
    - **Do NOT** initialize with README, .gitignore, or license (we already have these)
@@ -24,10 +24,10 @@ This guide walks you through publishing your PDF Interactive Skill to GitHub.
 After creating the repository, run these commands:
 
 ```bash
-cd /c/Users/anirudhyadav/pdf-interactive-skill
+cd /c/Users/anirudhyadav/pdf_reader_skill
 
-# Add the remote repository (replace 'yourusername' with your GitHub username)
-git remote add origin https://github.com/yourusername/pdf-interactive-skill.git
+# Add the remote repository (replace 'anirudhiitg' with your GitHub username)
+git remote add origin https://github.com/anirudhiitg/pdf_reader_skill.git
 
 # Verify the remote
 git remote -v
@@ -40,7 +40,7 @@ git push -u origin main
 ## Step 3: Update README with Your Info
 
 1. Edit `README.md` and replace:
-   - `yourusername` with your actual GitHub username (appears in URLs)
+   - `anirudhiitg` with your actual GitHub username (appears in URLs)
    - `[Your Name]` in the Author section
 
 2. Edit `LICENSE` and replace:
@@ -119,14 +119,14 @@ To showcase an example output:
 4. Branch: `main`, folder: `/docs`
 5. Click "Save"
 
-Your example will be available at: `https://yourusername.github.io/pdf-interactive-skill/`
+Your example will be available at: `https://anirudhiitg.github.io/pdf_reader_skill/`
 
 ## Step 7: Share Your Skill!
 
 ### On GitHub
 Your repository is now live at:
 ```
-https://github.com/yourusername/pdf-interactive-skill
+https://github.com/anirudhiitg/pdf_reader_skill
 ```
 
 ### Share on Social Media
@@ -140,7 +140,7 @@ Tweet about it:
 - Search & dark mode
 - Mobile-friendly
 
-Check it out: https://github.com/yourusername/pdf-interactive-skill
+Check it out: https://github.com/anirudhiitg/pdf_reader_skill
 
 #ClaudeCode #AI #PDF
 ```
@@ -153,8 +153,8 @@ Check if Anthropic has a skills directory and submit your skill!
 Add these to the top of your README.md:
 
 ```markdown
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/pdf-interactive-skill?style=social)](https://github.com/yourusername/pdf-interactive-skill/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/pdf-interactive-skill?style=social)](https://github.com/yourusername/pdf-interactive-skill/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/anirudhiitg/pdf_reader_skill?style=social)](https://github.com/anirudhiitg/pdf_reader_skill/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/anirudhiitg/pdf_reader_skill?style=social)](https://github.com/anirudhiitg/pdf_reader_skill/network/members)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 ```

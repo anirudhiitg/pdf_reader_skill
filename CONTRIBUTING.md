@@ -6,7 +6,7 @@ Thank you for your interest in contributing! This document provides guidelines f
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/yourusername/pdf-interactive-skill/issues)
+1. Check if the bug has already been reported in [Issues](https://github.com/anirudhiitg/pdf_reader_skill/issues)
 2. If not, create a new issue with:
    - Clear title and description
    - Steps to reproduce
@@ -16,7 +16,7 @@ Thank you for your interest in contributing! This document provides guidelines f
 
 ### Suggesting Enhancements
 
-1. Check [existing issues](https://github.com/yourusername/pdf-interactive-skill/issues) for similar suggestions
+1. Check [existing issues](https://github.com/anirudhiitg/pdf_reader_skill/issues) for similar suggestions
 2. Create a new issue with:
    - Clear description of the enhancement
    - Use cases and benefits
@@ -26,8 +26,8 @@ Thank you for your interest in contributing! This document provides guidelines f
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/yourusername/pdf-interactive-skill.git
-   cd pdf-interactive-skill
+   git clone https://github.com/anirudhiitg/pdf_reader_skill.git
+   cd pdf_reader_skill
    ```
 
 2. **Create a branch**
@@ -112,8 +112,8 @@ Docs: add installation instructions
 
 1. **Clone and setup**
    ```bash
-   git clone https://github.com/yourusername/pdf-interactive-skill.git
-   cd pdf-interactive-skill
+   git clone https://github.com/anirudhiitg/pdf_reader_skill.git
+   cd pdf_reader_skill
    ```
 
 2. **Create virtual environment**
@@ -141,7 +141,7 @@ Docs: add installation instructions
 ## Project Structure
 
 ```
-pdf-interactive-skill/
+pdf_reader_skill/
 ├── scripts/              # Main Python scripts
 │   ├── pdf_parser.py    # PDF extraction
 │   ├── ai_summarizer.py # AI summarization
