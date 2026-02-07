@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent: #0d6efd;
+            --accent-hover: #0b5ed7;
+            --border: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --code-bg: #f8f9fa;
+            --sidebar-width: 300px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #e9ecef;
+            --text-secondary: #adb5bd;
+            --accent: #4dabf7;
+            --accent-hover: #339af0;
+            --border: #495057;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --code-bg: #2d2d2d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 8px 36px 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+            width: 250px;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 18px;
+            display: none;
+        }
+
+        .search-input:not(:placeholder-shown) + .search-clear {
+            display: block;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 24px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 24px;
+            overflow-y: auto;
+            position: fixed;
+            top: 60px;
+            bottom: 0;
+            left: 0;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .toc {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: var(--text-primary);
+            text-decoration: none;
+            display: block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .toc a:hover {
+            background: var(--bg-tertiary);
+            color: var(--accent);
+        }
+
+        .toc a.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .toc .toc-level-2 {
+            margin-left: 16px;
+        }
+
+        .toc .toc-level-3 {
+            margin-left: 32px;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 48px;
+            max-width: 900px;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .content h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .content p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .content ul, .content ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .content li {
+            margin-bottom: 8px;
+        }
+
+        .content code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .content pre {
+            background: var(--code-bg);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 16px;
+            margin: 24px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+
+        .content th, .content td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .content th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        .summary-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .summary-box h4 {
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 16px;
+            }
+
+            .search-input {
+                width: 150px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 999;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .sidebar, .theme-toggle, .search-box {
+                display: none !important;
+            }
+
+            .content {
+                margin-left: 0;
+                max-width: 100%;
+            }
+        }
+
+        /* Highlight matched text */
+        .highlight {
+            background-color: yellow;
+            color: black;
+        }
+
+        [data-theme="dark"] .highlight {
+            background-color: #ffd43b;
+            color: #1a1a1a;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <div class="header-title">{{ title }}</div>
+        <div class="header-controls">
+            {% if not no_search %}
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+                <button class="search-clear" id="searchClear">×</button>
+            </div>
+            {% endif %}
+            <button class="theme-toggle" id="themeToggle">🌓</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-title">Table of Contents</div>
+            <ul class="toc" id="toc">
+                {% for section in sections %}
+                <li class="toc-level-{{ section.level }}">
+                    <a href="#section-{{ loop.index }}">{{ section.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content" id="content">
+            <h1>{{ title }}</h1>
+
+            {% if metadata %}
+            <div class="summary-box">
+                <h4>Document Info</h4>
+                <p><strong>Generated:</strong> {{ metadata.generated }}</p>
+                {% if metadata.pages %}<p><strong>Pages:</strong> {{ metadata.pages }}</p>{% endif %}
+                {% if metadata.source %}<p><strong>Source:</strong> {{ metadata.source }}</p>{% endif %}
+            </div>
+            {% endif %}
+
+            {% for section in sections %}
+            <section id="section-{{ loop.index }}" class="content-section">
+                {% if section.level == 1 %}
+                <h2>{{ section.title }}</h2>
+                {% elif section.level == 2 %}
+                <h3>{{ section.title }}</h3>
+                {% endif %}
+
+                {% if section.summary %}
+                <div class="summary-box">
+                    <h4>Summary</h4>
+                    <p>{{ section.summary }}</p>
+                </div>
+                {% endif %}
+
+                <div class="section-content">
+                    {{ section.content | safe }}
+                </div>
+            </section>
+            {% endfor %}
+        </main>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Load saved theme or use default
+        const savedTheme = localStorage.getItem('theme') || {% if dark_mode %}'dark'{% else %}'light'{% endif %};
+        html.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+
+        // Active TOC Item
+        const sections = document.querySelectorAll('.content-section');
+        const tocLinks = document.querySelectorAll('.toc a');
+
+        function updateActiveTOC() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveTOC);
+        updateActiveTOC();
+
+        {% if not no_search %}
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchClear = document.getElementById('searchClear');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(el => {
+                const parent = el.parentNode;
+                parent.replaceChild(document.createTextNode(el.textContent), el);
+                parent.normalize();
+            });
+        }
+
+        function highlightText(text) {
+            removeHighlights();
+            if (!text) {
+                contentSections.forEach(section => section.classList.remove('hidden'));
+                return;
+            }
+
+            const regex = new RegExp(`(${text})`, 'gi');
+            let hasMatches = false;
+
+            contentSections.forEach(section => {
+                const content = section.querySelector('.section-content');
+                const originalHTML = content.innerHTML;
+                let hasMatch = false;
+
+                // Search in text content
+                const walker = document.createTreeWalker(
+                    content,
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
+
+                const nodesToHighlight = [];
+                while (walker.nextNode()) {
+                    const node = walker.currentNode;
+                    if (regex.test(node.textContent)) {
+                        nodesToHighlight.push(node);
+                        hasMatch = true;
+                    }
+                }
+
+                nodesToHighlight.forEach(node => {
+                    const span = document.createElement('span');
+                    span.innerHTML = node.textContent.replace(regex, '<span class="highlight">$1</span>');
+                    node.parentNode.replaceChild(span, node);
+                });
+
+                if (hasMatch) {
+                    section.classList.remove('hidden');
+                    hasMatches = true;
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            highlightText(e.target.value);
+        });
+
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            highlightText('');
+            searchInput.focus();
+        });
+        {% endif %}
+
+        // Smooth Scrolling for TOC Links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('open');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
